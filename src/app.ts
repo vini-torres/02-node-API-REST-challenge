@@ -1,11 +1,10 @@
+import cookie from "@fastify/cookie";
 import fastify from "fastify";
 
-import { knexInstance } from "./database";
+import { dietRoutes } from "./routes/diet";
 
 export const app = fastify();
 
-app.get("/test", async () => {
-  const tables = await knexInstance("sqlite_schema").select("*");
+app.register(cookie);
 
-  return { tables };
-});
+app.register(dietRoutes);
